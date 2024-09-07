@@ -1,0 +1,44 @@
+<h2 class="text-center">General Knowledge Quiz</h2>
+<div *ngIf="currentQuestionIndex !== undefined">
+  <h5 class="question">
+    {{ questions[currentQuestionIndex].question }}
+  </h5>
+  <ul class="">
+    <li *ngFor="let answer of questions[currentQuestionIndex].answers">
+      <mat-checkbox
+        class="text-base"
+        [checked]="checkAnswerExists(currentQuestionIndex, answer[1])"
+        (click)="onAnswerClick(currentQuestionIndex, answer[1])"
+        >{{ answer[0] }}</mat-checkbox
+      >
+    </li>
+  </ul>
+</div>
+<div class="flex justify-center mt-2">
+  <button
+    *ngIf="currentQuestionIndex === undefined"
+    (click)="startQuiz()"
+    mat-raised-button
+    color="primary"
+    class=""
+  >
+    Start Quiz
+  </button>
+  <div *ngIf="currentQuestionIndex !== undefined" class="flex gap-2">
+    <button
+      mat-stroked-button
+      (click)="previousQuestion()"
+      *ngIf="currentQuestionIndex !== 0"
+    >
+      Previous
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!questionAnswers.has(currentQuestionIndex)"
+      (click)="nextQuestion()"
+    >
+      {{ currentQuestionIndex >= questions.length - 1 ? "Submit" : "Next" }}
+    </button>
+  </div>
+</div>

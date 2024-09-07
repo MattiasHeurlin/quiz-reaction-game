@@ -1,0 +1,26 @@
+<div class="game-container">
+  <div
+    *ngFor="let light of lights"
+    [style.backgroundColor]="light"
+    class="light"
+    (click)="lightClicked()"
+  ></div>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="startGame()"
+    [disabled]="gameActive"
+  >
+    Start Game
+  </button>
+  <div>
+    <h3 class="text-center text-gray-500">Click the lights when green!</h3>
+  </div>
+  <div *ngIf="reactionTime">
+    <p>Your reaction time: {{ reactionTime }} ms</p>
+  </div>
+
+  <div *ngIf="errorMessage">
+    <p class="error">{{ errorMessage }}</p>
+  </div>
+</div>
